@@ -21,4 +21,11 @@ interface Airport {
   keywords: string;
 }
 
-export type { Airport };
+
+interface Fly {
+  departureAirport: Airport | null;
+  arrivalAirport: Airport | null;
+  date: Date;
+}
+
+export type { Airport, Fly };

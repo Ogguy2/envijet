@@ -29,3 +29,7 @@
 .navigation-header-link {
   @apply font-semibold p-2 border-b-4 hover:border-b-4 hover:border-primary border-transparent transition-colors delay-150;
 }
+
+.body-style{
+  margin-right : 200px !important;
+}

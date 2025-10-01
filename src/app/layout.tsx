@@ -15,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${raleway.className} antialiased`}>
+      
+      <body
+        className={`${raleway.className} body-style! antialiased`}>
         <Theme>
           <div className="w-full  ">{children}</div>
         </Theme>
