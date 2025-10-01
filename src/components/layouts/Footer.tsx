@@ -22,12 +22,12 @@ const NewLetterForm = () => {
               />
               <input
                 type="text"
-                className="p-3 ps-[50px]  placeholder:font-semibold font-semibold text-primary  border border-primary rounded-md  w-full"
+                className="p-2.5 ps-[50px]  placeholder:font-semibold font-semibold text-primary  border border-primary rounded-md  w-full"
                 placeholder="name@exemple.com"
               />
             </div>
             <div>
-              <button className=" p-3 px-7 border font-semibold rounded-md bg-primary text-white ">
+              <button className=" p-2.5 px-7 border font-semibold rounded-md bg-primary text-white ">
                 S'inscrire
               </button>
             </div>
@@ -58,7 +58,6 @@ const Footer = () => {
               <Image
                 src="/assets/images/logos/logo_footer.png"
                 alt="logo"
-                quality={100}
                 width={190}
                 height={100}
               />

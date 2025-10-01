@@ -2,50 +2,30 @@
 
 @theme {
   --color-primary: #0B3551;
+  --animate-dialogOpen: dialogOpen 0.2s ease-in-out;
+  --animate-dialogClosed: dialogClosed 0.2s ease-in-out;
+
+  @keyframes dialogOpen {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes dialogClosed {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
 }
 
 .navigation-header-link {
   @apply font-semibold p-2 border-b-4 hover:border-b-4 hover:border-primary border-transparent transition-colors delay-150;
-}
-
-.ddddd-1 {
-  animation: movement-one 1s forwards;
-}
-
-.ddddd-2 {
-  animation: movement-two 1s forwards;
-}
-
-.ddddd-3 {
-  animation: movement-three 1s forwards;
-}
-
-@keyframes movement-one {
-  from {
-    transform: translateX(auto);
-  }
-
-  to {
-    transform: translateX(0%);
-  }
-}
-
-@keyframes movement-two {
-  from {
-    transform: translateX(auto);
-  }
-
-  to {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes movement-three {
-  from {
-    transform: translateX(auto);
-  }
-
-  to {
-    transform: translateX(200%);
-  }
 }

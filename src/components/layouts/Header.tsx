@@ -13,7 +13,6 @@ const Header = () => {
             <Image
               src="/assets/images/logos/logo_mobile.png"
               alt="logo"
-              quality={100}
               width={100}
               height={100}
             />
