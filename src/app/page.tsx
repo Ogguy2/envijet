@@ -16,29 +16,8 @@ import {
 } from "react-icons/fa";
 import { IoPeopleSharp } from "react-icons/io5";
 import { Dialog } from "radix-ui";
+import { Airport } from "@/types";
 
-interface Airport {
-  // id	ident	type	name	latitude_deg	longitude_deg	elevation_ft	continent	iso_country	iso_region	municipality	scheduled_service	icao_code	iata_code	gps_code	local_code	home_link	wikipedia_link	keywords
-  id: string;
-  ident: string;
-  type: string;
-  name: string;
-  latitude_deg: string;
-  longitude_deg: string;
-  elevation_ft: string;
-  continent: string;
-  iso_country: string;
-  iso_region: string;
-  municipality: string;
-  scheduled_service: string;
-  icao_code: string;
-  iata_code: string;
-  gps_code: string;
-  local_code: string;
-  home_link: string;
-  wikipedia_link: string;
-  keywords: string;
-}
 export default function HomePage() {
   const optionFly = [
     {
@@ -109,7 +88,17 @@ export default function HomePage() {
   );
 }
 
-const OneWayFormRequest = () => {
+interface DepartureInputProps {
+  icon: React.JSX.Element;
+  setSelectedAirport: (airport: Airport) => void;
+  title: string;
+}
+
+const DepartureInput = ({
+  icon,
+  setSelectedAirport,
+  title,
+}: DepartureInputProps) => {
   // Recherche active
   const [searchActive, setSearchActive] = React.useState(false);
   // Timeout de la recherche
@@ -118,14 +107,13 @@ const OneWayFormRequest = () => {
   const [abortController, setAbortController] = React.useState(null);
   // Loading
   const [loading, setLoading] = React.useState(false);
-  // Liste des aéroports
-  const [airports, setAirports] = React.useState([]);
   // Liste des aéroports filtrés
   const [filteredAirports, setFilteredAirports] = React.useState([]);
   // Query de la recherche
   const [query, setQuery] = React.useState("");
   // Liste de tous les aéroports
   const [allAirports, setAllAirports] = React.useState([]);
+  // Aéroport sélectionné
 
   // Charger le CSV une fois au montage
   React.useEffect(() => {
@@ -133,7 +121,7 @@ const OneWayFormRequest = () => {
       Papa.parse("/airports.csv", {
         download: true,
         header: true,
-        complete: result => {
+        complete: (result: any) => {
           setAllAirports(
             result.data.filter(
               (airport: Airport) => airport.name && airport.iata_code
@@ -249,8 +237,9 @@ const OneWayFormRequest = () => {
     setSearchTimeout(timeout);
   };
 
-  const handleSelectAirport = airport => {
+  const handleSelectAirport = (airport: Airport) => {
     setQuery(`${airport.name} (${airport.iata_code})`);
+    setSelectedAirport(airport);
     setFilteredAirports([]);
     setSearchActive(false);
   };
@@ -264,106 +253,132 @@ const OneWayFormRequest = () => {
   }, [searchTimeout, abortController]);
 
   return (
-    <div className="py-10 space-y-6">
-      <div className="grid relative grid-cols-4 gap-6">
-        {/* Aéroport de départ */}
-        <div className="space-y-2">
-          <div className="font-semibold">
-            <label htmlFor="departure">Aéroport de départ</label>
-          </div>
-          <div>
-            <div className="rounded p-3 flex items-center gap-3 border border-gray-200">
-              <div>
-                <FaPlaneDeparture />
-              </div>
-              <div className="flex-1">
-                <p className="font-bold">Côte d'Ivoire - Abidjan</p>
-                <input
-                  id="departure"
-                  type="text"
-                  className="w-full border-none p-0 focus:outline-none focus:ring-0"
-                  placeholder="Rechercher un aéroport"
-                />
-              </div>
+    <div className="space-y-2">
+      <div className="font-semibold">
+        <label htmlFor={title}>{title}</label>
+      </div>
+      <div className="relative">
+        <div className="relative">
+          <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
+            {icon}
+          </span>
+          <input
+            id={title}
+            type="text"
+            value={query}
+            onChange={handleSearchAirports}
+            onFocus={handleSearchActive}
+            onBlur={handleSearchBlur}
+            className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
+            placeholder="Rechercher un aéroport..."
+          />
+          {loading && (
+            <div className="absolute right-3 top-1/2 -translate-y-1/2">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
             </div>
-          </div>
+          )}
         </div>
-
-        {/* Aéroport d'arrivée */}
-        <div className="space-y-2">
-          <div className="font-semibold">
-            <label htmlFor="arrival">Aéroport d'arrivée</label>
-          </div>
-          <div className="relative">
-            <div className="flex-1 relative">
-              <FaPlaneArrival
-                className="text-primary absolute top-1/2 -translate-y-1/2 left-3"
-                size={20}
-              />
-              <input
-                id="arrival"
-                type="text"
-                value={query}
-                onChange={handleSearchAirports}
-                onFocus={handleSearchActive}
-                onBlur={handleSearchBlur}
-                className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
-                placeholder="Rechercher un aéroport..."
-              />
-              {loading && (
-                <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+        {searchActive && (filteredAirports.length > 0 || loading) && (
+          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto z-50">
+            {loading ? (
+              <div className="p-3 text-center text-gray-500">
+                Recherche en cours...
+              </div>
+            ) : (
+              filteredAirports.map((airport: Airport, index: number) => (
+                <div
+                  key={`${airport.iata_code}-${index}`}
+                  className="p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
+                  onClick={() => handleSelectAirport(airport)}>
+                  {airport.municipality && (
+                    <div className="">{airport.municipality}</div>
+                  )}
+                  <div className="text-sm text-gray-600 italic">
+                    {airport.name}{" "}
+                    {airport.iata_code && `(${airport.iata_code})`}
+                  </div>
                 </div>
-              )}
-            </div>
+              ))
+            )}
 
-            {searchActive && (filteredAirports.length > 0 || loading) && (
-              <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto z-50">
-                {loading ? (
-                  <div className="p-3 text-center text-gray-500">
-                    Recherche en cours...
-                  </div>
-                ) : (
-                  filteredAirports.map((airport: Airport, index: number) => (
-                    <div
-                      key={`${airport.iata_code}-${index}`}
-                      className="p-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
-                      onClick={() => handleSelectAirport(airport)}>
-                      {airport.municipality && (
-                        <div className="">{airport.municipality}</div>
-                      )}
-                      <div className="text-sm text-gray-600 italic">
-                        {airport.name}{" "}
-                        {airport.iata_code && `(${airport.iata_code})`}
-                      </div>
-                    </div>
-                  ))
-                )}
-
-                {filteredAirports.length === 0 && !loading && query.trim() && (
-                  <div className="p-3 text-center text-gray-500">
-                    Aucun aéroport trouvé
-                  </div>
-                )}
+            {filteredAirports.length === 0 && !loading && query.trim() && (
+              <div className="p-3 text-center text-gray-500">
+                Aucun aéroport trouvé
               </div>
             )}
           </div>
-        </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
+const OneWayFormRequest = () => {
+  const [selectedDepartureAirport, setSelecteDepartureAirport] =
+    React.useState<Airport | null>(null);
+  const [selectedArrivalAirport, setSelecteArrivalAirport] =
+    React.useState<Airport | null>(null);
+
+  const [selectedDate, setSelectedDate] = React.useState("");
+  const [searchActive, setSearchActive] = React.useState(false);
+
+  const handleSelectDate = e => {
+    console.log(e.target.value);
+    setSelectedDate(e.target.value);
+  };
+
+  const handleSearchActive = () => {
+    setSearchActive(true);
+  };
+
+  const handleSearchBlur = () => {
+    setSearchActive(false);
+  };
+
+  return (
+    <div className="py-10 space-y-6">
+      <div className="grid relative grid-cols-4 gap-6">
+        {/* Aéroport de départ */}
+        {JSON.stringify(selectedDate)}
+        {JSON.stringify(today)}
+        <DepartureInput
+          title="Aéroport de départ"
+          icon={<FaPlaneDeparture size={20} />}
+          setSelectedAirport={setSelecteDepartureAirport}
+        />
+        <DepartureInput
+          title="Aéroport d'arrivée"
+          icon={<FaPlaneArrival size={20} />}
+          setSelectedAirport={setSelecteArrivalAirport}
+        />
         {/* Date du départ */}
         <div className="space-y-2">
           <div className="font-semibold">
             <label htmlFor="departure-date">Date du départ</label>
           </div>
           <div>
-            <div className="rounded p-3 flex items-center gap-3 border border-gray-200">
-              <div>
-                <FaCalendarCheck />
+            <div className="relative">
+              <div className="relative">
+                <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
+                  <FaCalendarCheck />
+                </span>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  onFocus={handleSearchActive}
+                  onBlur={handleSearchBlur}
+                  onChange={handleSelectDate}
+                  className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
+                  placeholder="Rechercher un aéroport..."
+                />
               </div>
-              <div>
-                <p className="font-bold">Départ pour le</p>
-                <p className="">01 Juin 2025</p>
-              </div>
+              {searchActive && (
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 min-w-[100px] max-w-[500px]  z-50">
+                  <div className="p-3">
+                   
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -398,82 +413,12 @@ const OneWayFormRequest = () => {
   );
 };
 
-const DepartureDialog = () => {
-  return (
-    <div className="">
-      <Dialog.Root modal={true}>
-        <Dialog.Trigger asChild>
-          <div className="space-y-2">
-            <div className="font-semibold">
-              <label htmlFor="">Aéroport de départ</label>
-            </div>
-            <div>
-              <div className=" rounded bg-gray-100 hover:bg-gray-200 transition-all cursor-pointer duration-300 p-3 flex items-center gap-3 ">
-                <div>
-                  <FaPlaneDeparture />
-                </div>
-                <div>
-                  <p className="font-bold">Côte d'ivoire - Abidjan</p>
-                  <div className=" text-ellipsis overflow-hidden whitespace-nowrap  max-w-[250px] ">
-                    Aéroport Aéroport international de Cocody Aéroport Aéroport
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Dialog.Trigger>
-        <Dialog.Portal>
-          <Dialog.Overlay className=" data-{state=open]:animate-dialogOpen data-[state=closed]:animate-dialogClosed fixed w-screen h-screen  inset-0 bg-black/20" />
-          <Dialog.Content className="fixed min-w-xl bg-white rounded-lg p-4 z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <Dialog.Title></Dialog.Title>
-            <div className="space-y-4">
-              {/* Input search */}
-              <div className="">
-                <div className="flex-1  relative">
-                  <FaRegEnvelope
-                    className="text-primary absolute top-1/2 -translate-y-1/2 left-4"
-                    size={20}
-                  />
-                  <input
-                    type="text"
-                    className="p-2.5 ps-[50px]  placeholder:font-semibold font-semibold text-primary  border border-primary rounded-md  w-full"
-                    placeholder="name@exemple.com"
-                  />
-                </div>
-              </div>
-              {/* List of airports */}
-              <div></div>
-              <div>
-                <Dialog.Close className="w-full p-2.5 px-7 border font-semibold rounded-md bg-primary text-white ">
-                  Fermer
-                </Dialog.Close>
-              </div>
-            </div>
-          </Dialog.Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </div>
-  );
-};
-
 const RoundTripFormRequest = () => {
   return <div>BBBBBBBBBBBBBBBBBBBBBBBBBB</div>;
 };
 
 const MultiLegFormRequest = () => {
   return <div>CCCCCCCCCCCCCCCCCCCCCCC</div>;
-};
-
-const ArrivalDialog = () => {
-  return <div>ArrivalDialog</div>;
-};
-
-const PassengersDialog = () => {
-  return <div>PassengersDialog</div>;
-};
-
-const DateDialog = () => {
-  return <div>DateDialog</div>;
 };
 
 interface FlyOptionProps {
