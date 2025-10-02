@@ -92,8 +92,8 @@ const About = () => {
     <div className="py-20">
       <div className="w-full flex flex-col gap-12  md:flex-row-reverse items-center justify-between">
         <motion.div
-          whileInView={{ opacity: 1, x: 0 }}
-          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 100 }}
           viewport={{ once: true }}
           transition={{
             duration: 0.8,
@@ -134,8 +134,8 @@ const About = () => {
           </div>
         </motion.div>
         <motion.div
-          whileInView={{ opacity: 1, x: 0 }}
-          initial={{ opacity: 0, x: -100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -100 }}
           viewport={{ once: true }}
           className="md:max-w-1/2"
           transition={{
@@ -198,16 +198,16 @@ const Services = () => {
                 "w-full  md:sticky md:top-[180px]  md:flex  justify-between"
               )}>
               <motion.div
-                whileInView={{ opacity: 1, x: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, y: 100 }}
                 transition={{
                   duration: 0.8,
                   type: "spring",
                   stiffness: 300,
                   damping: 30,
                 }}
-                className="lg:max-w-1/2 bg-white  space-y-10">
+                className="lg:max-w-1/2 bg-white  flex items-center justify-center space-y-10">
                 <div className="max-w-md">
                   <div className="space-y-10">
                     <div className="text-2xl font-semibold">
@@ -228,9 +228,9 @@ const Services = () => {
                 </div>
               </motion.div>
               <motion.div
-                whileInView={{ opacity: 1, x: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                initial={{ opacity: 0, x: 100 }}
+                initial={{ opacity: 0, y: 100 }}
                 className="lg:max-w-1/2 "
                 transition={{
                   duration: 0.8,
