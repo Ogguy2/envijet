@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import {
-  FaFacebook,
   FaFacebookSquare,
   FaInstagram,
   FaLinkedin,
@@ -36,7 +35,7 @@ const NewLetterForm = () => {
             </div>
             <div>
               <button className=" p-2.5 px-7 border font-semibold rounded-md bg-primary text-white ">
-                S'inscrire
+                {"S'inscrire"}
               </button>
             </div>
           </div>

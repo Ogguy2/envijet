@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
-import { playfair_display, raleway } from "@/constants/fonts";
+import { raleway } from "@/constants/fonts";
 import { Theme } from "@radix-ui/themes";
 import "react-day-picker/style.css";
 import clsx from "clsx";

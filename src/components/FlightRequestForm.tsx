@@ -184,12 +184,6 @@ const RoundTripFormRequest = () => {
 };
 
 const MultiLegFormRequest = () => {
-  // Aeroport de depart
-  const [fly, setFly] = React.useState<Fly>({
-    departureAirport: null,
-    arrivalAirport: null,
-    date: new Date(),
-  });
 
   const [flys, setFlys] = React.useState<Fly[]>([
     {
