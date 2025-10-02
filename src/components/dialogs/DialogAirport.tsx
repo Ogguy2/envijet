@@ -16,9 +16,10 @@ const DialogDepartureAirpot = ({
     // Recherche active
     const [searchActive, setSearchActive] = React.useState(false);
     // Timeout de la recherche
-    const [searchTimeout, setSearchTimeout] = React.useState(null);
+    const [searchTimeout, setSearchTimeout] = React.useState<ReturnType<typeof setTimeout> | null>(null);
+
     // Controleur de la recherche
-    const [abortController, setAbortController] = React.useState(null);
+    const [abortController, setAbortController] = React.useState<AbortController | null>(null);
     // Loading
     const [loading, setLoading] = React.useState(false);
     // Liste des aéroports filtrés
@@ -48,11 +49,11 @@ const DialogDepartureAirpot = ({
           },
         });
       };
-      loadAirports();
+      // loadAirports();
     }, []);
   
     //  Recherche des aéroports dans la base de données
-    const filterAirports = searchQuery => {
+    const filterAirports = (searchQuery : any) => {
       if (!searchQuery.trim()) {
         setFilteredAirports([]);
         return [];
@@ -88,7 +89,7 @@ const DialogDepartureAirpot = ({
     };
   
     // On cherche les aéroports selon le query
-    const handleSearchAirports = event => {
+    const handleSearchAirports = (event : any) => {
       const value = event.target.value;
       setQuery(value);
   
@@ -123,7 +124,7 @@ const DialogDepartureAirpot = ({
           if (!controller.signal.aborted) {
             setFilteredAirports(results);
           }
-        } catch (error) {
+        } catch (error : any) {
           // Ignorer les erreurs d'annulation
           if (error.name !== "AbortError") {
             console.error("Erreur recherche:", error);

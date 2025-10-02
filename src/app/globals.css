@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --color-secondary: #AF8B0F;
   --color-primary: #0B3551;
   --animate-dialogOpen: dialogOpen 0.2s ease-in-out;
   --animate-dialogClosed: dialogClosed 0.2s ease-in-out;

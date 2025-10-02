@@ -1,7 +1,6 @@
 import { Dialog } from "radix-ui";
 import Btn from "../Buttons";
 import React from "react";
-import { FaCheck } from "react-icons/fa";
 import clsx from "clsx";
 
 const DialogPassenger = ({

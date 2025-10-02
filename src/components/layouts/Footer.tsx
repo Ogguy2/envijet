@@ -1,10 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { FaPhone, FaRegEnvelope } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaFacebookSquare,
+  FaInstagram,
+  FaLinkedin,
+  FaPhone,
+  FaRegEnvelope,
+} from "react-icons/fa";
 import clsx from "clsx";
 import { playfair_display } from "@/constants/fonts";
 import MaintContainer from "./MainContainer";
+import { FaXTwitter } from "react-icons/fa6";
 
 const NewLetterForm = () => {
   return (
@@ -49,7 +57,7 @@ const Footer = () => {
         La véritable expresion du prestige
       </div>
       {/* NewLetter */}
-      <MaintContainer>
+      <MaintContainer className="my-5!">
         <NewLetterForm />
         <div className="flex w-full py-7 justify-between ">
           {/* Logo */}
@@ -101,49 +109,26 @@ const Footer = () => {
                     href={
                       "https://www.facebook.com/profile.php?id=61560917589738"
                     }>
-                    <Image
-                      alt="instagram logo"
-                      width={40}
-                      height={30}
-                      className="h-8"
-                      src={"/assets/images/logos/social/instagram-2022.svg"}
-                    />
+                    <FaInstagram size={40} />
                   </Link>
                   <Link
                     href={
                       "https://www.facebook.com/profile.php?id=61560917589738"
                     }>
-                    <Image
-                      alt="instagram logo"
-                      width={40}
-                      height={30}
-                      className="h-8"
-                      src={"/assets/images/logos/social/instagram-2022.svg"}
-                    />
+                    <FaFacebookSquare size={40} />
                   </Link>
                   <Link
                     href={
                       "https://www.facebook.com/profile.php?id=61560917589738"
                     }>
-                    <Image
-                      alt="instagram logo"
-                      width={40}
-                      height={30}
-                      className="h-8"
-                      src={"/assets/images/logos/social/instagram-2022.svg"}
-                    />
+                    <FaLinkedin size={40} />
                   </Link>
                   <Link
                     href={
                       "https://www.facebook.com/profile.php?id=61560917589738"
                     }>
-                    <Image
-                      alt="instagram logo"
-                      width={40}
-                      height={30}
-                      className="h-8"
-                      src={"/assets/images/logos/social/instagram-2022.svg"}
-                    />
+                    <FaXTwitter size={40} />
+                  
                   </Link>
                 </div>
               </div>

@@ -18,7 +18,7 @@ const Btn = ({
       onClick={onClick}
       className={clsx(
         className,
-        "flex items-center justify-center gap-2 p-2.5 px-7 border font-semibold rounded-md bg-primary text-white hover:bg-primary/90 transition-colors"
+        "flex items-center justify-center gap-2 p-2.5 px-7 border font-semibold rounded-md bg-primary text-white hover:bg-primary/90  transition-colors"
       )}>
       {iconBefore && <span>{iconBefore}</span>}
       <span>{title}</span>

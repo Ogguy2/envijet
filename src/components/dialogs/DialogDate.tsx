@@ -2,7 +2,6 @@ import { Dialog } from "radix-ui";
 import React from "react";
 import { DayPicker } from "react-day-picker";
 import Btn from "../Buttons";
-import { FaCheck } from "react-icons/fa";
 
 interface DialogDateProps {
   children: React.ReactNode;
@@ -10,7 +9,7 @@ interface DialogDateProps {
 }
 
 const DialogDate = ({ children, setSelectedDate }: DialogDateProps) => {
-  const [date, setDate] = React.useState<Date>();
+  const [date, setDate] = React.useState<any>();
   return (
     <Dialog.Root>
       <Dialog.Trigger className="w-full">{children}</Dialog.Trigger>
@@ -31,10 +30,6 @@ const DialogDate = ({ children, setSelectedDate }: DialogDateProps) => {
             />
           </div>
           <Dialog.Close asChild>
-            {/* <button className="flex items-center justify-center gap-2 w-full p-2.5 px-7 border font-semibold rounded-md bg-primary text-white hover:bg-primary/90 transition-colors">
-                <span>valider</span>
-                <FaCheck />
-              </button> */}
             <Btn
               className="w-full"
               title="valider"
