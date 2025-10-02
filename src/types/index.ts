@@ -21,8 +21,8 @@ interface Airport {
   keywords: string;
 }
 
-
 interface Fly {
+  id: number;
   departureAirport: Airport | null;
   arrivalAirport: Airport | null;
   date: Date;

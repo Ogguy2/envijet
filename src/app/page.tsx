@@ -21,8 +21,11 @@ export default function HomePage() {
           <div className="relative w-full h-screen overflow-hidden">
             {/* Vidéo en background */}
             <video
+              suppressHydrationWarning
+              preload="auto"
               autoPlay
               loop
+              crossOrigin="anonymous"
               muted
               playsInline
               className="absolute top-0 left-0 w-full h-full object-cover z-0">
@@ -66,7 +69,7 @@ export default function HomePage() {
         <MaintContainer className=" ">
           <Services />
         </MaintContainer>
-        <MaintContainer className=" ">
+        <MaintContainer className="">
           <About />
         </MaintContainer>
       </div>
@@ -77,8 +80,8 @@ export default function HomePage() {
 
 const About = () => {
   return (
-    <div>
-      <div className="w-full flex items-center justify-between">
+    <div className="py-20">
+      <div className="w-full flex flex-row-reverse items-center justify-between">
         <motion.div
           whileInView={{ opacity: 1, x: 0 }}
           initial={{ opacity: 0, x: -100 }}
@@ -174,7 +177,7 @@ const Services = () => {
     },
   ];
   return (
-    <div className="">
+    <div className="py-20">
       <div
         className={clsx(
           playfair_display.className,
@@ -200,14 +203,12 @@ const Services = () => {
                 }}
                 className="max-w-1/2  space-y-10">
                 {index !== 0 && (
-                  <div className="bg--200 translate-y-[-200px]">
-                    <div className="space-y-6">
-                      <div>
-                        <div className="text-lg font-semibold">
-                          {element.title}
-                        </div>
-                        <div>{element.desctiption}</div>
+                  <div className="max-w-md  translate-y-[-200px]">
+                    <div className="space-y-10">
+                      <div className="text-2xl font-semibold">
+                        {element.title}
                       </div>
+                      <div className="text-lg">{element.desctiption}</div>
                     </div>
                   </div>
                 )}

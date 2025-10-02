@@ -2,7 +2,7 @@ import clsx from "clsx";
 interface BtnProps {
   iconBefore?: React.JSX.Element;
   iconAfter?: React.JSX.Element;
-  title: string;
+  title: string | null;
   className?: string;
   onClick?: () => void;
 }
@@ -18,14 +18,13 @@ const Btn = ({
       onClick={onClick}
       className={clsx(
         className,
-        "flex items-center justify-center gap-2 p-2.5 px-7 border font-semibold rounded-md bg-primary text-white hover:bg-primary/90  transition-colors"
+        "flex items-center cursor-pointer justify-center gap-2 p-2.5 px-7 border font-semibold rounded-md bg-primary text-white hover:bg-primary/90  transition-colors"
       )}>
       {iconBefore && <span>{iconBefore}</span>}
-      <span>{title}</span>
+      {title && <span>{title}</span>}
       {iconAfter && <span>{iconAfter}</span>}
     </button>
   );
 };
-
 
 export default Btn;

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import clsx from "clsx";
 import React from "react";
 import {
@@ -6,6 +6,7 @@ import {
   FaPlaneArrival,
   FaPlaneDeparture,
   FaPlus,
+  FaTrash,
 } from "react-icons/fa";
 import DialogDepartureAirpot from "./dialogs/DialogAirport";
 import DialogPassenger from "./dialogs/DialogPassengers";
@@ -63,9 +64,7 @@ export default function FlightRequestForm() {
           </div>
         </div>
         <div className="">
-          {/* Plane Option swith fly option */}
           <div className="my-20"></div>
-          
         </div>
       </div>
     </div>
@@ -75,10 +74,12 @@ export default function FlightRequestForm() {
 const OneWayFormRequest = () => {
   // Aeroport de depart
   const [fly, setFly] = React.useState<Fly>({
+    id: 0,
     departureAirport: null,
     arrivalAirport: null,
     date: new Date(),
   });
+
   // Nombre de passagers
   const [passengerNumber, setPassengerNumber] = React.useState(1);
   return (
@@ -97,7 +98,8 @@ const OneWayFormRequest = () => {
               </span>
               <DialogPassenger setData={setPassengerNumber}>
                 <input
-                  defaultValue={passengerNumber}
+                  value={passengerNumber}
+                  onChange={() => {}}
                   type="text"
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
                   placeholder="Passager..."
@@ -107,7 +109,6 @@ const OneWayFormRequest = () => {
           </div>
         </div>
       </div>
-
       <div className="">
         <Btn className="inline-block!" title="Réserver" />
       </div>
@@ -118,15 +119,21 @@ const OneWayFormRequest = () => {
 const RoundTripFormRequest = () => {
   // Aeroport de depart
   const [fly, setFly] = React.useState<Fly>({
+    id: 0,
     departureAirport: null,
     arrivalAirport: null,
     date: new Date(),
   });
   // Date du départ
-  const [selectedDateReturn, setSelectedDateReturn] = React.useState<Date>();
+  const [selectedDateReturn, setSelectedDateReturn] = React.useState<Date>(
+    new Date()
+  );
   // Nombre de passagers
   const [passengerNumber, setPassengerNumber] = React.useState(1);
 
+  React.useEffect(() => {
+    setSelectedDateReturn(fly.date);
+  }, [fly.date]);
   return (
     <div className=" py-10 space-y-6">
       <div className="grid relative grid-cols-4 gap-6">
@@ -140,14 +147,21 @@ const RoundTripFormRequest = () => {
             <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
               <FaCalendarCheck />
             </span>
-            <DialogDate setSelectedDate={setSelectedDateReturn}>
+            <DialogDate
+              minDate={fly.date}
+              setSelectedDate={setSelectedDateReturn}>
               <div>
                 <input
                   id="date"
                   type="text"
-                  defaultValue={selectedDateReturn?.toLocaleDateString()}
+                  onChange={() => {}}
+                  value={
+                    selectedDateReturn
+                      ? selectedDateReturn.toLocaleDateString("fr-FR")
+                      : ""
+                  }
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
-                  placeholder="Date du départ..."
+                  placeholder="Date du retour..."
                 />
               </div>
             </DialogDate>
@@ -165,7 +179,8 @@ const RoundTripFormRequest = () => {
               </span>
               <DialogPassenger setData={setPassengerNumber}>
                 <input
-                  defaultValue={passengerNumber}
+                  value={passengerNumber}
+                  onChange={() => {}}
                   type="text"
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
                   placeholder="Passager..."
@@ -184,9 +199,9 @@ const RoundTripFormRequest = () => {
 };
 
 const MultiLegFormRequest = () => {
-
   const [flys, setFlys] = React.useState<Fly[]>([
     {
+      id: 0,
       departureAirport: null,
       arrivalAirport: null,
       date: new Date(),
@@ -197,11 +212,15 @@ const MultiLegFormRequest = () => {
     setFlys([
       ...flys,
       {
+        id: flys.length,
         departureAirport: null,
         arrivalAirport: null,
         date: new Date(),
       },
     ]);
+  };
+  const handleRemoveFly = (fly: Fly) => {
+    setFlys(flys.filter(f => f.id !== fly.id));
   };
   // Nombre de passagers
   const [passengerNumber, setPassengerNumber] = React.useState(1);
@@ -213,9 +232,12 @@ const MultiLegFormRequest = () => {
             key={index}
             className="col-span-3"
             fly={fly}
+            prevFly={index > 0 ? flys[index - 1] : undefined}
+            nextFly={index < flys.length - 1 ? flys[index + 1] : undefined}
             setFly={value =>
               setFlys(flys.map((fly, i) => (i === index ? value : fly)))
             }
+            handleRemoveFly={handleRemoveFly}
           />
         ))}
       </div>
@@ -238,7 +260,8 @@ const MultiLegFormRequest = () => {
               </span>
               <DialogPassenger setData={setPassengerNumber}>
                 <input
-                  defaultValue={passengerNumber}
+                  value={passengerNumber}
+                  onChange={() => {}}
                   type="text"
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
                   placeholder="Passager..."
@@ -257,12 +280,18 @@ const MultiLegFormRequest = () => {
 
 const SegmentFly = ({
   fly,
+  prevFly,
+  nextFly,
   setFly,
   className,
+  handleRemoveFly,
 }: {
   fly: Fly;
+  prevFly?: Fly;
+  nextFly?: Fly;
   className?: string;
   setFly: (fly: Fly) => void;
+  handleRemoveFly?: (fly: Fly) => void;
 }) => {
   return (
     <div className={clsx("gap-6 grid grid-cols-3", className)}>
@@ -276,6 +305,7 @@ const SegmentFly = ({
             <FaPlaneDeparture size={20} />
           </span>
           <DialogDepartureAirpot
+            data={fly.departureAirport}
             setSelectedAirport={value =>
               setFly({ ...fly, departureAirport: value })
             }>
@@ -302,9 +332,10 @@ const SegmentFly = ({
             <FaPlaneArrival size={20} />
           </span>
           <DialogDepartureAirpot
-            setSelectedAirport={value =>
-              setFly({ ...fly, arrivalAirport: value })
-            }>
+            data={fly.arrivalAirport}
+            setSelectedAirport={value => {
+              setFly({ ...fly, arrivalAirport: value });
+            }}>
             <div>
               <input
                 id={"departure-airport"}
@@ -322,24 +353,53 @@ const SegmentFly = ({
         <div className="font-semibold">
           <label htmlFor="departure-date">Date du départ</label>
         </div>
-        <div className="relative">
-          <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
-            <FaCalendarCheck />
-          </span>
-          <DialogDate
-            setSelectedDate={value => setFly({ ...fly, date: value })}>
-            <div>
-              <input
-                id="date"
-                type="text"
-                defaultValue={fly.date?.toLocaleDateString()}
-                className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
-                placeholder="Date du départ..."
-              />
-            </div>
-          </DialogDate>
+        <div className=" flex gap-3">
+          <div className="relative flex-1">
+            <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
+              <FaCalendarCheck />
+            </span>
+            <DialogDate
+              setSelectedDate={value => setFly({ ...fly, date: value })}>
+              <div>
+                <input
+                  id="date"
+                  type="text"
+                  onChange={() => {}}
+                  value={fly.date ? fly.date.toLocaleDateString("fr-FR") : ""}
+                  className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
+                  placeholder="Date du départ..."
+                />
+              </div>
+            </DialogDate>
+          </div>
+          {handleRemoveFly && (
+          <Btn
+            className="px-4!"
+            title={null}
+            iconAfter={<FaTrash />}
+            onClick={() => handleRemoveFly(fly)}
+          />
+        )}
         </div>
       </div>
+      {fly.departureAirport &&
+        fly.arrivalAirport &&
+        fly.departureAirport.id === fly.arrivalAirport.id && (
+          <div className="text-red-500 text-sm">
+            The start and finish cannot be the same.
+          </div>
+        )}
+      {/* Comprend previon date fly et next date fly */}
+      {prevFly && fly.date <= prevFly.date && (
+        <div className="text-red-500 text-sm">
+          The start date cannot be before the previous date.
+        </div>
+      )}
+      {nextFly && fly.date >= nextFly.date && (
+        <div className="text-red-500 text-sm">
+          The start date cannot be after the next date.
+        </div>
+      )}
     </div>
   );
 };
