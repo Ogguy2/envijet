@@ -28,9 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${raleway.className}  antialiased`}>
+      <body className={`${raleway.className} overflow-x-hidden antialiased`}>
         <Theme>
-          <div className={clsx(raleway.className, "")}>{children}</div>
+          <div className={clsx(raleway.className, "overflow-x-hidden")}>{children}</div>
         </Theme>
       </body>
     </html>
