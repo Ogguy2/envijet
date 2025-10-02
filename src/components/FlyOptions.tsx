@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
 interface FlyOptionProps {
   optionSelected: { name: string; value: string };
   options: { name: string; value: string; icon: React.JSX.Element }[];
@@ -16,7 +16,7 @@ const FlightOptions = ({
   return (
     <div className="relative w-full">
       {/* Container */}
-      <div className="grid grid-cols-3 bg-primary/10 rounded-lg relative overflow-hidden">
+      <div className="grid lg:grid-cols-3 bg-primary/10 rounded-lg relative overflow-hidden">
         {options.map(option => (
           <button
             key={option.value}
@@ -33,11 +33,22 @@ const FlightOptions = ({
 
         {/* Barre animée */}
         <motion.div
-          layout
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="absolute top-0 h-16 w-1/3 bg-primary rounded-lg"
+          className="absolute top-0 h-16 hidden lg:block w-1/3 bg-primary rounded-lg"
           animate={{
             left:
+              optionSelected.value === "Aller simple"
+                ? "0%"
+                : optionSelected.value === "Aller-retour"
+                ? "33.333%"
+                : "66.666%",
+          }}
+        />
+        <motion.div
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="absolute top-0 lg:hidden h-16 w-full bg-primary rounded-lg"
+          animate={{
+            top:
               optionSelected.value === "Aller simple"
                 ? "0%"
                 : optionSelected.value === "Aller-retour"
@@ -49,6 +60,5 @@ const FlightOptions = ({
     </div>
   );
 };
-
 
 export default FlightOptions;

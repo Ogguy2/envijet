@@ -84,15 +84,15 @@ const OneWayFormRequest = () => {
   const [passengerNumber, setPassengerNumber] = React.useState(1);
   return (
     <div className="py-10 space-y-6">
-      <div className="grid relative grid-cols-4 gap-6">
-        <SegmentFly className="col-span-3" fly={fly} setFly={setFly} />
+      <div className="grid relative  lg:grid-cols-4 gap-6">
+        <SegmentFly className="lg:col-span-3" fly={fly} setFly={setFly} />
         {/* Nombre de passagers */}
         <div className="space-y-2">
           <div className="font-semibold">
             <label htmlFor="departure-date">Nombre de passagers</label>
           </div>
           <div>
-            <div className="relative">
+            <div className="relative  w-full">
               <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
                 <IoPeopleSharp />
               </span>
@@ -136,10 +136,10 @@ const RoundTripFormRequest = () => {
   }, [fly.date]);
   return (
     <div className=" py-10 space-y-6">
-      <div className="grid relative grid-cols-4 gap-6">
-        <SegmentFly className="col-span-3" fly={fly} setFly={setFly} />
+      <div className="grid relative  lg:grid-cols-4 gap-6">
+        <SegmentFly className="lg:col-span-3" fly={fly} setFly={setFly} />
         {/* Date du retour */}
-        <div className="space-y-2">
+        <div className=" space-y-2">
           <div className="font-semibold">
             <label htmlFor="departure-date">Date du retour</label>
           </div>
@@ -294,7 +294,8 @@ const SegmentFly = ({
   handleRemoveFly?: (fly: Fly) => void;
 }) => {
   return (
-    <div className={clsx("gap-6 grid grid-cols-3", className)}>
+    <div
+      className={clsx("gap-6 grid md:grid-cols-2 lg:grid-cols-3", className)}>
       {/* Departure Airport */}
       <div className="space-y-2">
         <div className="font-semibold">
@@ -373,13 +374,13 @@ const SegmentFly = ({
             </DialogDate>
           </div>
           {handleRemoveFly && (
-          <Btn
-            className="px-4!"
-            title={null}
-            iconAfter={<FaTrash />}
-            onClick={() => handleRemoveFly(fly)}
-          />
-        )}
+            <Btn
+              className="px-4!"
+              title={null}
+              iconAfter={<FaTrash />}
+              onClick={() => handleRemoveFly(fly)}
+            />
+          )}
         </div>
       </div>
       {fly.departureAirport &&

@@ -15,13 +15,13 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const NewLetterForm = () => {
   return (
-    <div className=" text-black space-y-6 rounded-lg bg-white px-7 py-13">
+    <div className=" text-black space-y-6 rounded-lg bg-white px-7 py-6 md:py-13">
       <div className={clsx(playfair_display.className, "font-bold text-3xl")}>
         Inscrivez-vous à notre newsletter
       </div>
       <div className="">
         <form action="">
-          <div className="flex items-center gap-4">
+          <div className="md:flex space-y-2 md:space-y-0 items-center gap-4">
             <div className="flex-1  relative">
               <FaRegEnvelope
                 className="text-primary absolute top-1/2 -translate-y-1/2 left-4"
@@ -58,10 +58,10 @@ const Footer = () => {
       {/* NewLetter */}
       <MaintContainer className="my-5!">
         <NewLetterForm />
-        <div className="flex w-full py-7 justify-between ">
+        <div className="flex-col lg:flex-row  gap-10 flex w-full py-7 justify-between ">
           {/* Logo */}
           <div className="flex-1 space-y-4">
-            <div>
+            <div className="flex justify-center lg:justify-start ">
               <Image
                 src="/assets/images/logos/logo_footer.png"
                 alt="logo"
@@ -69,7 +69,7 @@ const Footer = () => {
                 height={100}
               />
             </div>
-            <div className="flex flex-col gap-1 ">
+            <div className="flex flex-col items-center lg:items-start gap-1 ">
               <Link
                 className="flex items-center gap-3 transition-all hover:underline hover:font-semibold"
                 href={"mailto:sales@envyjet.com"}>
@@ -84,11 +84,11 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          <div className=" ">
-            <div className="grid grid-cols-3 gap-15">
+          <div className="">
+            <div className="flex flex-col items-center sm:items-start sm:grid sm:grid-cols-2 md:grid-cols-3 gap-15">
               {/* payment method */}
-              <div className="space-y-5">
-                <div className="font-bold">METHODES DE PAYMENT</div>
+              <div className="space-y-5 flex flex-col items-center sm:items-start ">
+                <div className="font-bold ">METHODES DE PAYMENT</div>
                 <svg
                   height="30"
                   viewBox="0.5 0.5 999 323.684"
@@ -101,38 +101,37 @@ const Footer = () => {
                 </svg>
               </div>
               {/* Social média */}
-              <div className="space-y-5">
+              <div className="space-y-5 flex flex-col items-center sm:items-start ">
                 <div className="font-bold uppercase">Nos réseaux</div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-4">
                   <Link
                     href={
                       "https://www.facebook.com/profile.php?id=61560917589738"
                     }>
-                    <FaInstagram size={40} />
+                    <FaInstagram size={35} />
                   </Link>
                   <Link
                     href={
                       "https://www.facebook.com/profile.php?id=61560917589738"
                     }>
-                    <FaFacebookSquare size={40} />
+                    <FaFacebookSquare size={35} />
                   </Link>
                   <Link
                     href={
                       "https://www.facebook.com/profile.php?id=61560917589738"
                     }>
-                    <FaLinkedin size={40} />
+                    <FaLinkedin size={35} />
                   </Link>
                   <Link
                     href={
                       "https://www.facebook.com/profile.php?id=61560917589738"
                     }>
-                    <FaXTwitter size={40} />
-                  
+                    <FaXTwitter size={35} />
                   </Link>
                 </div>
               </div>
               {/* Navigation */}
-              <div className="space-y-5">
+              <div className="space-y-5 flex flex-col items-center sm:items-start ">
                 <div className="font-bold">ENVYJET</div>
                 <div className="flex  flex-col gap-2">
                   <Link
@@ -162,7 +161,7 @@ const Footer = () => {
                   </Link>
                 </div>
               </div>
-              <div className="space-y-5">
+              <div className="space-y-5 flex flex-col items-center sm:items-start ">
                 <div className="font-bold"></div>
                 <div className="flex text-sm flex-col gap-2">
                   <Link className="transition-all underline" href={"#"}>

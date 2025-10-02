@@ -16,25 +16,45 @@ export default function HomePage() {
     <div className="relative">
       <Header />
       <div className="">
-        <div className="relative w-full h-screen">
-          {/* <div className="absolute w-full h-full bg-black/30"></div> */}
-          <div className="relative w-full h-screen overflow-hidden">
-            {/* Vidéo en background */}
-            <video
-              suppressHydrationWarning
-              preload="auto"
-              autoPlay
-              loop
-              crossOrigin="anonymous"
-              muted
-              playsInline
-              className="absolute top-0 left-0 w-full h-full object-cover z-0">
-              <source src="/assets/videos/hero-video.mp4" type="video/mp4" />
-              Votre navigateur ne supporte pas la vidéo en background.
-            </video>
-          </div>
-          <div className="bg-black/20 absolute top-0 left-0 w-full h-full z-10"></div>
-          <div className="z-20 space-y-6 absolute  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <Hero />
+        <MaintContainer className=" ">
+          <FlightRequestForm />
+        </MaintContainer>
+        <MaintContainer className="my-0! ">
+          <Services />
+        </MaintContainer>
+        <MaintContainer className="my0!">
+          <About />
+        </MaintContainer>
+      </div>
+      <Footer />
+    </div>
+  );
+}
+
+const Hero = () => {
+  return (
+    <div>
+      <div className="relative w-full h-screen">
+        {/* <div className="absolute w-full h-full bg-black/30"></div> */}
+        <div className="relative w-full h-screen overflow-hidden">
+          {/* Vidéo en background */}
+          <video
+            suppressHydrationWarning
+            preload="auto"
+            autoPlay
+            loop
+            crossOrigin="anonymous"
+            muted
+            playsInline
+            className="absolute top-0 left-0 w-full h-full object-cover z-0">
+            <source src="/assets/videos/hero-video.mp4" type="video/mp4" />
+            Votre navigateur ne supporte pas la vidéo en background.
+          </video>
+        </div>
+        <div className="bg-black/20 absolute top-0 left-0 w-full h-full z-10"></div>
+        <div className="bg-black/20 absolute top-0 left-0 w-full h-full z-20">
+          <div className="flex items-center justify-center h-full">
             <motion.div
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -63,28 +83,17 @@ export default function HomePage() {
             </motion.div>
           </div>
         </div>
-        <MaintContainer className=" ">
-          <FlightRequestForm />
-        </MaintContainer>
-        <MaintContainer className=" ">
-          <Services />
-        </MaintContainer>
-        <MaintContainer className="">
-          <About />
-        </MaintContainer>
       </div>
-      <Footer />
     </div>
   );
-}
-
+};
 const About = () => {
   return (
     <div className="py-20">
-      <div className="w-full flex flex-row-reverse items-center justify-between">
+      <div className="w-full flex flex-col gap-12  md:flex-row-reverse items-center justify-between">
         <motion.div
           whileInView={{ opacity: 1, x: 0 }}
-          initial={{ opacity: 0, x: -100 }}
+          initial={{ opacity: 0, x: 100 }}
           viewport={{ once: true }}
           transition={{
             duration: 0.8,
@@ -92,7 +101,7 @@ const About = () => {
             stiffness: 300,
             damping: 30,
           }}
-          className="max-w-1/2 space-y-10">
+          className="md:max-w-1/2 space-y-10">
           <div className="space-y-6">
             <div
               className={clsx(
@@ -126,9 +135,9 @@ const About = () => {
         </motion.div>
         <motion.div
           whileInView={{ opacity: 1, x: 0 }}
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0, x: -100 }}
           viewport={{ once: true }}
-          className="max-w-1/2"
+          className="md:max-w-1/2"
           transition={{
             duration: 0.8,
             type: "spring",
@@ -177,38 +186,51 @@ const Services = () => {
     },
   ];
   return (
-    <div className="py-20">
+    <div className="lg:pb-20">
       <div
         className={clsx(
           playfair_display.className,
-          "sticky top-[75px] py-4 bg-white z-20 text-6xl text-secondary"
+          "md:sticky md:top-[75px] py-10 bg-white z-20 text-6xl text-secondary"
         )}>
         Our Services
       </div>
-      <div>
+      <div className="space-y-10">
         {services.map((element, index) => {
           return (
             <div
               key={index}
-              className="w-full bg- sticky top-[180px]  flex  justify-between">
+              className={clsx(
+                index == services.length - 1 && "",
+                "w-full  md:sticky md:top-[180px]  md:flex  justify-between"
+              )}>
               <motion.div
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                initial={{ opacity: 0, x: -100 }}
+                initial={{ opacity: 0, x: 100 }}
                 transition={{
                   duration: 0.8,
                   type: "spring",
                   stiffness: 300,
                   damping: 30,
                 }}
-                className="max-w-1/2  space-y-10">
+                className="lg:max-w-1/2  space-y-10">
                 {index !== 0 && (
-                  <div className="max-w-md  translate-y-[-200px]">
+                  <div className="max-w-md  md:translate-y-[-300px] lg:translate-y-[-500px]">
                     <div className="space-y-10">
                       <div className="text-2xl font-semibold">
                         {element.title}
                       </div>
                       <div className="text-lg">{element.desctiption}</div>
+                      <div>
+                        <div>
+                          <a href="#request-form">
+                            <Btn
+                              className="border-transparent bg-secondary!"
+                              title="FIND OUT MORE"
+                            />
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -218,7 +240,7 @@ const Services = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   initial={{ opacity: 0, x: 100 }}
-                  className="max-w-1/2 "
+                  className="lg:max-w-1/2 "
                   transition={{
                     duration: 0.8,
                     type: "spring",
@@ -227,7 +249,7 @@ const Services = () => {
                   }}>
                   <div className="">
                     <Image
-                      className="rounded-tl-[200px] rounded-br-[200px]"
+                      className="lg:rounded-tl-[200px] py-[50px] lg:rounded-br-[200px]"
                       alt="about-1"
                       width={900}
                       height={100}
