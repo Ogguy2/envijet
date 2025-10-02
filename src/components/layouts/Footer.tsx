@@ -35,7 +35,7 @@ const NewLetterForm = () => {
             </div>
             <div>
               <button className=" p-2.5 px-7 border font-semibold rounded-md bg-primary text-white ">
-                {"S'inscrire"}
+                {"Subscribe"}
               </button>
             </div>
           </div>
@@ -88,7 +88,7 @@ const Footer = () => {
             <div className="flex flex-col items-center sm:items-start sm:grid sm:grid-cols-2 md:grid-cols-3 gap-15">
               {/* payment method */}
               <div className="space-y-5 flex flex-col items-center sm:items-start ">
-                <div className="font-bold ">METHODES DE PAYMENT</div>
+                <div className="font-bold ">PAYMENT METHODS</div>
                 <svg
                   height="30"
                   viewBox="0.5 0.5 999 323.684"
@@ -102,7 +102,7 @@ const Footer = () => {
               </div>
               {/* Social média */}
               <div className="space-y-5 flex flex-col items-center sm:items-start ">
-                <div className="font-bold uppercase">Nos réseaux</div>
+                <div className="font-bold uppercase">Our networks</div>
                 <div className="flex flex-col gap-4">
                   <Link
                     href={

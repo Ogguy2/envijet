@@ -23,7 +23,7 @@ export default function HomePage() {
         <MaintContainer className="my-0! ">
           <Services />
         </MaintContainer>
-        <MaintContainer className="my0!">
+        <MaintContainer className="my-!">
           <About />
         </MaintContainer>
       </div>
@@ -163,11 +163,6 @@ const Services = () => {
   }
   const services: ServiceProps[] = [
     {
-      title: "null",
-      desctiption: "EnvyJet offers you a unique opportunity to save money.",
-      image: "/assets/images/about.jpg",
-    },
-    {
       title: "Exclusive private jet charter",
       desctiption:
         "From your starting point to your final destination, relax with complete peace of mind.",
@@ -182,15 +177,15 @@ const Services = () => {
     {
       title: "Empty Legs",
       desctiption: "EnvyJet offers you a unique opportunity to save money.",
-      image: null,
+      image: "/assets/images/about.jpg",
     },
   ];
   return (
-    <div className="lg:pb-20">
+    <div className="">
       <div
         className={clsx(
           playfair_display.className,
-          "md:sticky md:top-[75px] py-10 bg-white z-20 text-6xl text-secondary"
+          "md:sticky top-[75px] py-4 bg-white z-20 text-6xl text-secondary"
         )}>
         Our Services
       </div>
@@ -200,7 +195,6 @@ const Services = () => {
             <div
               key={index}
               className={clsx(
-                index == services.length - 1 && "",
                 "w-full  md:sticky md:top-[180px]  md:flex  justify-between"
               )}>
               <motion.div
@@ -213,51 +207,47 @@ const Services = () => {
                   stiffness: 300,
                   damping: 30,
                 }}
-                className="lg:max-w-1/2  space-y-10">
-                {index !== 0 && (
-                  <div className="max-w-md  md:translate-y-[-300px] lg:translate-y-[-500px]">
-                    <div className="space-y-10">
-                      <div className="text-2xl font-semibold">
-                        {element.title}
-                      </div>
-                      <div className="text-lg">{element.desctiption}</div>
+                className="lg:max-w-1/2 bg-white  space-y-10">
+                <div className="max-w-md">
+                  <div className="space-y-10">
+                    <div className="text-2xl font-semibold">
+                      {element.title}
+                    </div>
+                    <div className="text-lg">{element.desctiption}</div>
+                    <div>
                       <div>
-                        <div>
-                          <a href="#request-form">
-                            <Btn
-                              className="border-transparent bg-secondary!"
-                              title="FIND OUT MORE"
-                            />
-                          </a>
-                        </div>
+                        <a href="#request-form">
+                          <Btn
+                            className="border-transparent bg-secondary!"
+                            title="FIND OUT MORE"
+                          />
+                        </a>
                       </div>
                     </div>
                   </div>
-                )}
+                </div>
               </motion.div>
-              {element.image && (
-                <motion.div
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  initial={{ opacity: 0, x: 100 }}
-                  className="lg:max-w-1/2 "
-                  transition={{
-                    duration: 0.8,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                  }}>
-                  <div className="">
-                    <Image
-                      className="lg:rounded-tl-[200px] py-[50px] lg:rounded-br-[200px]"
-                      alt="about-1"
-                      width={900}
-                      height={100}
-                      src="/assets/images/about.jpg"
-                    />
-                  </div>
-                </motion.div>
-              )}
+              <motion.div
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                initial={{ opacity: 0, x: 100 }}
+                className="lg:max-w-1/2 "
+                transition={{
+                  duration: 0.8,
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                }}>
+                <div className="">
+                  <Image
+                    className="lg:rounded-tl-[200px] py-[50px] lg:rounded-br-[200px]"
+                    alt="about-1"
+                    width={900}
+                    height={100}
+                    src="/assets/images/about.jpg"
+                  />
+                </div>
+              </motion.div>
             </div>
           );
         })}
