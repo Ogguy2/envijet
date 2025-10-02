@@ -21,18 +21,18 @@ import Btn from "./Buttons";
 export default function FlightRequestForm() {
   const optionFly = [
     {
-      name: "Aller simple",
-      value: "Aller simple",
+      name: "One-way",
+      value: "One-way",
       icon: <FaRightLong />,
     },
     {
-      name: "Aller-retour",
-      value: "Aller-retour",
+      name: "Round-trip",
+      value: "Round-trip",
       icon: <FaRightLeft />,
     },
     {
-      name: "Vols multiples",
-      value: "Vols multiples",
+      name: "Multi-destination",
+      value: "Multi-destination",
       icon: <TiArrowLoop />,
     },
   ];
@@ -58,9 +58,9 @@ export default function FlightRequestForm() {
           </div>
           {/* Fly form */}
           <div className="p-3">
-            {flyOption.value === "Aller simple" && <OneWayFormRequest />}
-            {flyOption.value === "Aller-retour" && <RoundTripFormRequest />}
-            {flyOption.value === "Vols multiples" && <MultiLegFormRequest />}
+                {flyOption.value === "One-way" && <OneWayFormRequest />}
+                {flyOption.value === "Round-trip" && <RoundTripFormRequest />}
+                {flyOption.value === "Multi-destination" && <MultiLegFormRequest />}
           </div>
         </div>
         <div className="">
@@ -89,7 +89,7 @@ const OneWayFormRequest = () => {
         {/* Nombre de passagers */}
         <div className="space-y-2">
           <div className="font-semibold">
-            <label htmlFor="departure-date">Nombre de passagers</label>
+            <label htmlFor="departure-date">Number of passengers</label>
           </div>
           <div>
             <div className="relative  w-full">
@@ -102,7 +102,7 @@ const OneWayFormRequest = () => {
                   onChange={() => {}}
                   type="text"
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
-                  placeholder="Passager..."
+                  placeholder="Passenger..."
                 />
               </DialogPassenger>
             </div>
@@ -110,7 +110,7 @@ const OneWayFormRequest = () => {
         </div>
       </div>
       <div className="">
-        <Btn className="inline-block!" title="Réserver" />
+        <Btn className="inline-block!" title="Book" />
       </div>
     </div>
   );
@@ -141,7 +141,7 @@ const RoundTripFormRequest = () => {
         {/* Date du retour */}
         <div className=" space-y-2">
           <div className="font-semibold">
-            <label htmlFor="departure-date">Date du retour</label>
+            <label htmlFor="departure-date">Return date</label>
           </div>
           <div className="relative">
             <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
@@ -161,7 +161,7 @@ const RoundTripFormRequest = () => {
                       : ""
                   }
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
-                  placeholder="Date du retour..."
+                  placeholder="Return date..."
                 />
               </div>
             </DialogDate>
@@ -170,7 +170,7 @@ const RoundTripFormRequest = () => {
         {/* Nombre de passagers */}
         <div className="space-y-2">
           <div className="font-semibold">
-            <label htmlFor="departure-date">Nombre de passagers</label>
+            <label htmlFor="departure-date">Number of passengers</label>
           </div>
           <div>
             <div className="relative">
@@ -183,7 +183,7 @@ const RoundTripFormRequest = () => {
                   onChange={() => {}}
                   type="text"
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
-                  placeholder="Passager..."
+                  placeholder="Passenger..."
                 />
               </DialogPassenger>
             </div>
@@ -192,7 +192,7 @@ const RoundTripFormRequest = () => {
       </div>
 
       <div className="">
-        <Btn className="inline-block!" title="Réserver" />
+        <Btn className="inline-block!" title="Book" />
       </div>
     </div>
   );
@@ -245,13 +245,13 @@ const MultiLegFormRequest = () => {
         onClick={handleAddFly}
         className="cursor-pointer w-full flex items-center gap-2 rounded-2xl justify-center p-2.5 border-2 border-dashed">
         <FaPlus />
-        <span className="font-semibold">Ajouter un vol</span>
+        <span className="font-semibold">Add a flight</span>
       </button>
       <div>
         {/* Nombre de passagers */}
         <div className="space-y-2">
           <div className="font-semibold">
-            <label htmlFor="departure-date">Nombre de passagers</label>
+            <label htmlFor="departure-date">Number of passengers</label>
           </div>
           <div>
             <div className="relative">
@@ -264,7 +264,7 @@ const MultiLegFormRequest = () => {
                   onChange={() => {}}
                   type="text"
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
-                  placeholder="Passager..."
+                  placeholder="Passenger..."
                 />
               </DialogPassenger>
             </div>
@@ -272,7 +272,7 @@ const MultiLegFormRequest = () => {
         </div>
       </div>
       <div className="">
-        <Btn className="inline-block!" title="Réserver" />
+        <Btn className="inline-block!" title="Book" />
       </div>
     </div>
   );
@@ -299,7 +299,7 @@ const SegmentFly = ({
       {/* Departure Airport */}
       <div className="space-y-2">
         <div className="font-semibold">
-          <label htmlFor="departure-date">Aéroport de départ</label>
+          <label htmlFor="departure-date">Departure airport</label>
         </div>
         <div className="relative">
           <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
@@ -326,7 +326,7 @@ const SegmentFly = ({
       {/* Arrival Airport */}
       <div className="space-y-2">
         <div className="font-semibold">
-          <label htmlFor="departure-date">Aéroport d'arriver</label>
+          <label htmlFor="departure-date">Arrival airport</label>
         </div>
         <div className="relative">
           <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
@@ -342,7 +342,7 @@ const SegmentFly = ({
                 id={"departure-airport"}
                 type="text"
                 defaultValue={fly.arrivalAirport?.name}
-                placeholder="Rechercher un aéroport..."
+                placeholder="Search for an airport..."
                 className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
               />
             </div>
@@ -352,7 +352,7 @@ const SegmentFly = ({
       {/* Date du départ */}
       <div className="space-y-2">
         <div className="font-semibold">
-          <label htmlFor="departure-date">Date du départ</label>
+          <label htmlFor="departure-date">Departure date</label>
         </div>
         <div className=" flex gap-3">
           <div className="relative flex-1">
@@ -368,7 +368,7 @@ const SegmentFly = ({
                   onChange={() => {}}
                   value={fly.date ? fly.date.toLocaleDateString("fr-FR") : ""}
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
-                  placeholder="Date du départ..."
+                  placeholder="Departure date..."
                 />
               </div>
             </DialogDate>
@@ -387,18 +387,18 @@ const SegmentFly = ({
         fly.arrivalAirport &&
         fly.departureAirport.id === fly.arrivalAirport.id && (
           <div className="text-red-500 text-sm">
-            The start and finish cannot be the same.
+            The start and finish cannot be the same airport.
           </div>
         )}
       {/* Comprend previon date fly et next date fly */}
       {prevFly && fly.date <= prevFly.date && (
         <div className="text-red-500 text-sm">
-          The start date cannot be before the previous date.
+          The departure date cannot be before the previous departure date.
         </div>
       )}
       {nextFly && fly.date >= nextFly.date && (
         <div className="text-red-500 text-sm">
-          The start date cannot be after the next date.
+          The departure date cannot be after the next date.
         </div>
       )}
     </div>

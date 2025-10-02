@@ -17,7 +17,7 @@ const NewLetterForm = () => {
   return (
     <div className=" text-black space-y-6 rounded-lg bg-white px-7 py-6 md:py-13">
       <div className={clsx(playfair_display.className, "font-bold text-3xl")}>
-        Inscrivez-vous à notre newsletter
+        Sign up for our newsletter
       </div>
       <div className="">
         <form action="">
@@ -53,7 +53,7 @@ const Footer = () => {
           playfair_display.className,
           "text-center text-3xl py-4"
         )}>
-        La véritable expresion du prestige
+        The true expression of prestige
       </div>
       {/* NewLetter */}
       <MaintContainer className="my-5!">
@@ -133,11 +133,11 @@ const Footer = () => {
               {/* Navigation */}
               <div className="space-y-5 flex flex-col items-center sm:items-start ">
                 <div className="font-bold">ENVYJET</div>
-                <div className="flex  flex-col gap-2">
+                <div className="flex flex-col gap-2">
                   <Link
                     className="transition-all hover:underline hover:font-semibold"
                     href={"#"}>
-                    Pourquoi ENVYJET ?
+                    Why ENVYJET?
                   </Link>
                   <Link
                     className="transition-all hover:underline hover:font-semibold"
@@ -147,17 +147,17 @@ const Footer = () => {
                   <Link
                     className="transition-all hover:underline hover:font-semibold"
                     href={"#"}>
-                    Vols partager
+                    Shared Flights
                   </Link>
                   <Link
                     className="transition-all hover:underline hover:font-semibold"
                     href={"#"}>
-                    Vols à vide
+                    Empty Leg Flights
                   </Link>
                   <Link
                     href={"#"}
                     className="transition-all hover:underline hover:font-semibold">
-                    Contactez-nous
+                    Contact Us
                   </Link>
                 </div>
               </div>
@@ -180,7 +180,7 @@ const Footer = () => {
 
       <hr className="opacity-30" />
       <div className={clsx("text-center text-sm py-3")}>
-        © 2025 Envy Jet all rights reserved
+        © 2025 EnvyJet all rights reserved
       </div>
     </div>
   );

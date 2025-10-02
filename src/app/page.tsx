@@ -75,7 +75,7 @@ const Hero = () => {
                   <a href="#request-form">
                     <Btn
                       className="border-transparent bg-[#D99923]!"
-                      title="Réserver un vol"
+                      title="Book a flight"
                     />
                   </a>
                 </div>

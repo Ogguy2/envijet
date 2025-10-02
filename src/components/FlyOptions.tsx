@@ -37,9 +37,9 @@ const FlightOptions = ({
           className="absolute top-0 h-16 hidden lg:block w-1/3 bg-primary rounded-lg"
           animate={{
             left:
-              optionSelected.value === "Aller simple"
+              optionSelected.value === "One-way"
                 ? "0%"
-                : optionSelected.value === "Aller-retour"
+                : optionSelected.value === "Round-trip"
                 ? "33.333%"
                 : "66.666%",
           }}
@@ -49,9 +49,9 @@ const FlightOptions = ({
           className="absolute top-0 lg:hidden h-16 w-full bg-primary rounded-lg"
           animate={{
             top:
-              optionSelected.value === "Aller simple"
+              optionSelected.value === "One-way"
                 ? "0%"
-                : optionSelected.value === "Aller-retour"
+                : optionSelected.value === "Round-trip"
                 ? "33.333%"
                 : "66.666%",
           }}
