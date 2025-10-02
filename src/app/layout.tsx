@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${raleway.className} overflow-x-hidden antialiased`}>
         <Theme>
-          <div className={clsx(raleway.className, "overflow-x-hidden")}>{children}</div>
+          <div className={clsx(raleway.className, "")}>{children}</div>
         </Theme>
       </body>
     </html>

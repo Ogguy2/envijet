@@ -58,9 +58,9 @@ export default function FlightRequestForm() {
           </div>
           {/* Fly form */}
           <div className="p-3">
-                {flyOption.value === "One-way" && <OneWayFormRequest />}
-                {flyOption.value === "Round-trip" && <RoundTripFormRequest />}
-                {flyOption.value === "Multi-destination" && <MultiLegFormRequest />}
+            {flyOption.value === "One-way" && <OneWayFormRequest />}
+            {flyOption.value === "Round-trip" && <RoundTripFormRequest />}
+            {flyOption.value === "Multi-destination" && <MultiLegFormRequest />}
           </div>
         </div>
         <div className="">
@@ -110,7 +110,13 @@ const OneWayFormRequest = () => {
         </div>
       </div>
       <div className="">
-        <Btn className="inline-block!" title="Book" />
+        <Btn
+          onClick={() => {
+            console.log(fly, passengerNumber);
+          }}
+          className="inline-block!"
+          title="Book"
+        />
       </div>
     </div>
   );
@@ -125,14 +131,12 @@ const RoundTripFormRequest = () => {
     date: new Date(),
   });
   // Date du départ
-  const [selectedDateReturn, setSelectedDateReturn] = React.useState<Date>(
-    new Date()
-  );
+  const [departurReturn, setDeparturReturn] = React.useState<Date>(new Date());
   // Nombre de passagers
   const [passengerNumber, setPassengerNumber] = React.useState(1);
 
   React.useEffect(() => {
-    setSelectedDateReturn(fly.date);
+    setDeparturReturn(fly.date);
   }, [fly.date]);
   return (
     <div className=" py-10 space-y-6">
@@ -147,17 +151,15 @@ const RoundTripFormRequest = () => {
             <span className="text-primary absolute top-1/2 -translate-y-1/2 left-3">
               <FaCalendarCheck />
             </span>
-            <DialogDate
-              minDate={fly.date}
-              setSelectedDate={setSelectedDateReturn}>
+            <DialogDate minDate={fly.date} setSelectedDate={setDeparturReturn}>
               <div>
                 <input
                   id="date"
                   type="text"
                   onChange={() => {}}
                   value={
-                    selectedDateReturn
-                      ? selectedDateReturn.toLocaleDateString("fr-FR")
+                    departurReturn
+                      ? departurReturn.toLocaleDateString("fr-FR")
                       : ""
                   }
                   className="p-2.5 ps-[40px] shadow text-primary border border-primary/30 rounded-md w-full"
@@ -192,7 +194,13 @@ const RoundTripFormRequest = () => {
       </div>
 
       <div className="">
-        <Btn className="inline-block!" title="Book" />
+        <Btn
+          onClick={() => {
+            console.log(fly, passengerNumber, departurReturn);
+          }}
+          className="inline-block!"
+          title="Book"
+        />
       </div>
     </div>
   );
@@ -272,7 +280,13 @@ const MultiLegFormRequest = () => {
         </div>
       </div>
       <div className="">
-        <Btn className="inline-block!" title="Book" />
+        <Btn
+          onClick={() => {
+            console.log(flys, passengerNumber);
+          }}
+          className="inline-block!"
+          title="Book"
+        />
       </div>
     </div>
   );

@@ -34,11 +34,11 @@ const Header = () => {
           <Menu />
           {/* Sign up */}
           <div className="hidden lg:flex items-center gap-2">
-            <button className=" p-2.5 px-7 border font-semibold rounded-md bg-primary text-white ">
-              Se connecter
+            <button className="p-2.5 px-7 border font-semibold rounded-md bg-primary text-white">
+              Sign In
             </button>
-            <button className=" p-2.5 px-7 border font-semibold rounded-md border-primary text-primary  ">
-              S'inscrire
+            <button className="p-2.5 px-7 border font-semibold rounded-md border-primary text-primary">
+              Sign Up
             </button>
           </div>
           <SideBar />
