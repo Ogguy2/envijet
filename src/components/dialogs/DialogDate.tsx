@@ -1,6 +1,6 @@
 import { Dialog } from "radix-ui";
 import React from "react";
-import { DayPicker, Matcher } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import Btn from "../Buttons";
 
 interface DialogDateProps {

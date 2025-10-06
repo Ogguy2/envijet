@@ -3,7 +3,6 @@ import Footer from "@/components/layouts/Footer";
 import Header from "@/components/layouts/Header";
 import MaintContainer from "@/components/layouts/MainContainer";
 import React from "react";
-import bg from "../../public/assets/images/hero-1.jpg";
 import FlightRequestForm from "@/components/FlightRequestForm";
 import { motion } from "motion/react";
 import clsx from "clsx";

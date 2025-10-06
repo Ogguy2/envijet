@@ -1,6 +1,5 @@
 import { Airport } from "@/types";
 import { Dialog } from "radix-ui";
-import { FaCheck } from "react-icons/fa";
 import Btn from "../Buttons";
 import React from "react";
 import Papa from "papaparse";
@@ -14,8 +13,6 @@ const DialogDepartureAirpot = ({
   data: Airport | null;
   setSelectedAirport: (airport: Airport) => void;
 }) => {
-  // Recherche active
-  const [searchActive, setSearchActive] = React.useState(false);
   // Timeout de la recherche
   const [searchTimeout, setSearchTimeout] = React.useState<ReturnType<
     typeof setTimeout
@@ -24,8 +21,6 @@ const DialogDepartureAirpot = ({
   // Controleur de la recherche
   const [abortController, setAbortController] =
     React.useState<AbortController | null>(null);
-  // Loading
-  const [loading, setLoading] = React.useState(false);
   // Liste des aéroports filtrés
   const [filteredAirports, setFilteredAirports] = React.useState([]);
   // Query de la recherche
@@ -82,7 +77,6 @@ const DialogDepartureAirpot = ({
     // On reset si le champ est vide
     if (!value.trim()) {
       setFilteredAirports([]);
-      setLoading(false);
       return;
     }
 
@@ -103,7 +97,6 @@ const DialogDepartureAirpot = ({
     // Débounce de 300ms
     const timeout = setTimeout(() => {
       try {
-        setLoading(true);
         const results = filterAirports(value);
 
         // Ne mettre à jour que si la recherche n'a pas été annulée
@@ -116,10 +109,6 @@ const DialogDepartureAirpot = ({
           console.error("Erreur recherche:", error);
           setFilteredAirports([]);
         }
-      } finally {
-        if (!controller.signal.aborted) {
-          setLoading(false);
-        }
       }
     }, 300);
 
@@ -130,7 +119,6 @@ const DialogDepartureAirpot = ({
     setQuery(`${airport.name} (${airport.iata_code})`);
     setSelectedAirport(airport);
     setFilteredAirports([]);
-    setSearchActive(false);
   };
 
   // Nettoyage
@@ -143,8 +131,6 @@ const DialogDepartureAirpot = ({
 
   const resetAllState = () => {
     setFilteredAirports([]);
-    setLoading(false);
-    setSearchActive(false);
     if (data) {
       setQuery(data.name);
       filterAirports(data.name);
